@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      Poppins: ['Poppins', 'sans-serif']
+    },
     extend: {
       animation: {
         'marquee-paused': 'marquee-paused 20s linear infinite',

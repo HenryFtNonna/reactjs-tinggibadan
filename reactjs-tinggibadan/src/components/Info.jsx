@@ -15,10 +15,10 @@ const SensorData = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white p-8">
-      <div className="mx-auto max-w-2xl border-4 border-black bg-white p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+    <div className="min-h-screen bg-white p-8 font-Poppins ">
+      <div className="mx-auto max-w-2xl  border-4 border-black bg-white p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
         {/* Header */}
-        <SensorTitle>📡 DATA SENSOR</SensorTitle>
+        <SensorTitle>DATA SENSOR</SensorTitle>
         
         {/* Height Cards */}
         <div className="mb-2 grid gap-4 md:grid-cols-2">
@@ -39,11 +39,11 @@ const SensorData = () => {
         {/* Detection Status Cards */}
         <div className="mb-10 grid gap-4 md:grid-cols-2">
           <DetectionCard 
-            title="" 
+            title="HC-SR04" 
             detected={hcData.objectDetected} 
           />
           <DetectionCard
-            title=""
+            title="HY-SRF05"
             detected={hyData.objectDetected}
           />
         </div>
@@ -54,8 +54,8 @@ const SensorData = () => {
             <thead>
               <tr className="border-b-2 border-black">
                 <th className="p-3 text-left bg-white"></th>
-                <th className="p-3 bg-blue-200 border-l-2 border-black">HC-SR04</th>
-                <th className="p-3 bg-yellow-200 border-l-2 border-black">HY-SRF05</th>
+                <th className="p-3 bg-[#04c4fe] border-l-2 border-black">HC-SR04</th>
+                <th className="p-3 bg-[#fecb04] border-l-2 border-black">HY-SRF05</th>
               </tr>
             </thead>
             <tbody>
@@ -81,7 +81,7 @@ const SensorData = () => {
           </table>
         </div>
         
-        <div className="mt-8 border-4 border-black bg-yellow-200 p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+        <div className="mt-8 border-4 border-black bg-[#fecb04] p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
   <div className="animate-marquee-paused whitespace-nowrap">
     <span className="inline-block pr-8 font-bold text-lg">
       © 2024 By Mohan Henry Kusuma. All rights reserved.
@@ -143,12 +143,12 @@ const TableData = ({ value, unit }) => (
 // Komponen Kartu Deteksi (Tambahkan ini di bawah komponen SensorCard)
 const DetectionCard = ({ title, detected }) => {
   const statusColor = detected ? 'bg-green-400 border-green-600' : 'bg-red-400 border-red-600';
-  const statusText = detected ? "Objek Terdeteksi ✅" : "Tidak Ada Objek ❌";
+  const statusText = detected ? "Objek Terdeteksi " : "Tidak Ada Objek ";
 
   return (
     <div className={`border-4 p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${statusColor}`}>
-      <h3 className="text-s font-normal mb-2">{title}</h3>
-      <div className="text-s font-black flex items-center justify-between">
+      <h3 className="text-black font-bold mb-2">{title}</h3>
+      <div className="text-gray-700 font-semibold flex items-center justify-between">
         <span>{statusText}</span>
         <span className="text-s">{detected ? "🔴" : "🟢"}</span>
       </div>
