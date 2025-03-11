@@ -21,7 +21,7 @@ const SensorData = () => {
         <SensorTitle>DATA SENSOR</SensorTitle>
         
         {/* Height Cards */}
-        <div className="mb-2 grid gap-4 md:grid-cols-2">
+        <div className="mb-8 grid gap-4 md:grid-cols-2">
           <SensorCard 
             title="HC-SR04" 
             value={hcData.height} 
