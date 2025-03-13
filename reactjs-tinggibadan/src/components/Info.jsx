@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "./firebase";
+import { Link } from "react-router-dom";
 
 const SensorData = () => {
   const [hcData, setHcData] = useState({});
@@ -49,7 +50,7 @@ const SensorData = () => {
         </div>
 
         {/* Comparison Table */}
-        <div className="border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div className="border-2 mb-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           <table className="w-full border-collapse">
             <thead>
               <tr className="border-b-2 border-black">
@@ -80,7 +81,12 @@ const SensorData = () => {
             </tbody>
           </table>
         </div>
-        
+        <Link
+  to="/history-data"
+  className="border-4 border-black px-4 py-2 bg-green-400 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all mb-4 inline-block"
+>
+  📚 History Data
+</Link>
         <div className="mt-8 border-4 border-black bg-[#fecb04] p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
   <div className="animate-marquee-paused whitespace-nowrap">
     <span className="inline-block pr-8 font-bold text-lg">
