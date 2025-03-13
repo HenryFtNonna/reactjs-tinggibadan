@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Info from './components/Info'
-import Preloader from './components/preloader'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Info from './components/Info';
+import History from './components/History'; // Tambahkan impor untuk komponen History
+import Preloader from './components/Preloader';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,11 +15,17 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  if (isLoading) {
+    return <Preloader />; // Tampilkan Preloader sebelum aplikasi utama muncul
+  }
+
   return (
-    <>
-      {isLoading && <Preloader />}
-      <Info />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Info />} />
+        <Route path="/history-data" element={<History />} />
+      </Routes>
+    </Router>
   );
 };
 
