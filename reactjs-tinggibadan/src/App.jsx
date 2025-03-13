@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Info from './components/Info';
 import History from './components/History'; // Tambahkan impor untuk komponen History
-import Preloader from './components/Preloader';
+import Preloader from "./components/preloader";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
