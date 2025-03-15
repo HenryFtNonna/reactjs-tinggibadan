@@ -80,24 +80,24 @@ const History = () => {
                 <th className="p-3 bg-white text-left">Tanggal</th>
                 
                 {/* HC-SR04 Header */}
-                <th className="p-3 bg-blue-200 border-l-4 border-black" colSpan="5">
-                  HC-SR04
-                </th>
-                
-                {/* HY-SRF05 Header */}
-                <th className="p-3 bg-yellow-200 border-l-4 border-black" colSpan="5">
-                  HY-SRF05
-                </th>
+                <th className="p-3 bg-blue-200 border-l-4 border-black" colSpan="6">
+                HC-SR04
+              </th>
+
+              <th className="p-3 bg-yellow-200 border-l-4 border-black" colSpan="6">
+                HY-SRF05
+              </th>
               </tr>
               <tr className="border-b-2 border-black">
-                <th className="p-3 bg-white"></th>
-                
+              <th className="p-3 bg-white"></th>
+  
                 {/* HC Sub Header */}
                 <th className="p-3 bg-blue-100 border-l-2 border-black">No</th>
                 <th className="p-3 bg-blue-100">Tinggi</th>
                 <th className="p-3 bg-blue-100">Latensi</th>
                 <th className="p-3 bg-blue-100">Akurasi</th>
                 <th className="p-3 bg-blue-100">Error</th>
+                <th className="p-3 bg-blue-100">Deteksi</th> {/* Tambah kolom ini */}
                 
                 {/* HY Sub Header */}
                 <th className="p-3 bg-yellow-100 border-l-2 border-black">No</th>
@@ -105,6 +105,7 @@ const History = () => {
                 <th className="p-3 bg-yellow-100">Latensi</th>
                 <th className="p-3 bg-yellow-100">Akurasi</th>
                 <th className="p-3 bg-yellow-100">Error</th>
+                <th className="p-3 bg-yellow-100">Deteksi</th> {/* Tambah kolom ini */}
                 
                 <th className="p-3 bg-white border-l-4 border-black">Aksi</th>
               </tr>
@@ -137,6 +138,13 @@ const History = () => {
               <td className="p-3 bg-blue-50">{entry.latency?.toFixed(2)} ms</td>
               <td className="p-3 bg-blue-50">{entry.accuracy?.toFixed(2)}%</td>
               <td className="p-3 bg-blue-50">{entry.error?.toFixed(2)}%</td>
+              <td className="p-3 bg-blue-50">
+                <div className={`inline-block px-2 py-1 border-2 border-black ${
+                  entry.detected ? 'bg-green-400' : 'bg-red-400'
+                }`}>
+                  {entry.detected ? "✅" : "❌"}
+                </div>
+              </td>
               
               {/* Kosongkan kolom HY */}
               <td className="p-3 bg-yellow-50 border-l-2 border-black">-</td>
@@ -144,11 +152,13 @@ const History = () => {
               <td className="p-3 bg-yellow-50">-</td>
               <td className="p-3 bg-yellow-50">-</td>
               <td className="p-3 bg-yellow-50">-</td>
+              <td className="p-3 bg-yellow-50">-</td>
             </>
-          ) : (
+                      ) : (
             <>
               {/* Kosongkan kolom HC */}
               <td className="p-3 bg-blue-50 border-l-2 border-black">-</td>
+              <td className="p-3 bg-blue-50">-</td>
               <td className="p-3 bg-blue-50">-</td>
               <td className="p-3 bg-blue-50">-</td>
               <td className="p-3 bg-blue-50">-</td>
@@ -160,6 +170,13 @@ const History = () => {
               <td className="p-3 bg-yellow-50">{entry.latency?.toFixed(2)} ms</td>
               <td className="p-3 bg-yellow-50">{entry.accuracy?.toFixed(2)}%</td>
               <td className="p-3 bg-yellow-50">{entry.error?.toFixed(2)}%</td>
+              <td className="p-3 bg-yellow-50">
+                <div className={`inline-block px-2 py-1 border-2 border-black ${
+                  entry.detected ? 'bg-green-400' : 'bg-red-400'
+                }`}>
+                  {entry.detected ? "✅" : "❌"}
+                </div>
+              </td>
             </>
           )}
           
