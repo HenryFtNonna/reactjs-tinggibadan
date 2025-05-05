@@ -5,13 +5,25 @@ import { Link } from "react-router-dom";
 
 const History = () => {
   const [historyData, setHistoryData] = useState([]);
-
+  const parseCustomTimestamp = (timestampStr) => {
+    try {
+      const [datePart, timePart] = timestampStr.split(' ');
+      const [day, month, year] = datePart.split('/');
+      const [hours, minutes, seconds] = timePart.split(':');
+      
+      return new Date(
+        `20${year}-${month}-${day}T${hours}:${minutes}:${seconds}`
+      ).getTime();
+    } catch (error) {
+      console.error('Error parsing timestamp:', timestampStr);
+      return 0; // Return default value jika parsing gagal
+    }
+  };
   useEffect(() => {
     const fetchData = () => {
       const hcHistoryRef = ref(database, 'HC/history');
       const hyHistoryRef = ref(database, 'HY/history');
   
-      // Ambil data HC
       onValue(hcHistoryRef, (hcSnapshot) => {
         const hcData = hcSnapshot.val() || {};
         const hcHistoryArray = Object.entries(hcData).map(([id, entry]) => ({
@@ -20,7 +32,6 @@ const History = () => {
           ...entry
         }));
   
-        // Ambil data HY
         onValue(hyHistoryRef, (hySnapshot) => {
           const hyData = hySnapshot.val() || {};
           const hyHistoryArray = Object.entries(hyData).map(([id, entry]) => ({
@@ -29,9 +40,18 @@ const History = () => {
             ...entry
           }));
   
-          // Gabungkan dan urutkan berdasarkan timestamp dari yang terlama
           const combinedData = [...hcHistoryArray, ...hyHistoryArray].sort(
-            (a, b) => a.timestamp_server - b.timestamp_server // Diubah ke ascending
+            (a, b) => {
+              const timeA = a.timestamp ? 
+                parseCustomTimestamp(a.timestamp) : 
+                a.timestamp_server;
+              
+              const timeB = b.timestamp ? 
+                parseCustomTimestamp(b.timestamp) : 
+                b.timestamp_server;
+              
+              return timeA - timeB;
+            }
           );
           
           setHistoryData(combinedData);
@@ -126,9 +146,9 @@ const History = () => {
 
       return (
         <tr key={`${entry.sensorType}-${entry.id}`} className="border-b-2 border-black">
-          <td className="p-3 bg-white">
-            {new Date(entry.timestamp_server).toLocaleString()}
-          </td>
+    <td className="p-3 bg-white">
+      {entry.timestamp || new Date(entry.timestamp_server).toLocaleString()}
+    </td>
           
           {/* HC Data */}
           {entry.sensorType === 'HC' ? (
